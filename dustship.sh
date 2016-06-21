@@ -102,10 +102,10 @@ item_pos() {
 # Move the player and determine its position
 position_move() {
   case $key in
-    w|'[A') [ $player_y != 16 ] && player_y=$(( $player_y + 1 )) && game_neg_y=${game_neg_y#??} && game_y="$game_y\n";; # UP
-    s|'[B') [ $player_y != 0 ] && player_y=$(( $player_y - 1 )) && game_neg_y="$game_neg_y\n" && game_y=${game_y#??};; # DOWN
-    d|'[C') [ $player_x != 48 ] && player_x=$(( $player_x + 1 )) && game_x="$game_x ";; # RIGHT
-    a|'[D') [ $player_x != 0 ] && player_x=$(( $player_x - 1 )) && game_x=${game_x#?};; # LEFT
+    w|'[A') [ $player_y != 16 ] && player_y=$(( player_y + 1 )) && game_neg_y=${game_neg_y#??} && game_y="$game_y\n";; # UP
+    s|'[B') [ $player_y != 0 ] && player_y=$(( player_y - 1 )) && game_neg_y="$game_neg_y\n" && game_y=${game_y#??};; # DOWN
+    d|'[C') [ $player_x != 48 ] && player_x=$(( player_x + 1 )) && game_x="$game_x ";; # RIGHT
+    a|'[D') [ $player_x != 0 ] && player_x=$(( player_x - 1 )) && game_x=${game_x#?};; # LEFT
     q) clear; exit;;
   esac
 }
@@ -119,7 +119,7 @@ player_ship() {
 
 # Score, life and gameover
 state() {
-  [ $player_y -gt $(( item_y - 4 )) ] && { [ $player_x = $item_x ] || [ $((player_x + 1 )) = $item_x ]; } && score=$(( score + 1 )) && item_x=
+  [ $player_y -gt $(( item_y - 4 )) ] && { [ $player_x = $item_x ] || [ $(( player_x + 1 )) = $item_x ]; } && score=$(( score + 1 )) && item_x=
   [ $item_x -lt 0 ] && life=$(( life - 1 )) && item_x=
   [ $item_y = $player_y ] && item_x= && life=$(( life - 1 ))
   if [ $life -lt 1 ] ;then
